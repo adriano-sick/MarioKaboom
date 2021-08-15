@@ -1,0 +1,13 @@
+/* Adriano Siqueira - 8/1/2021 - Mario Kaboom.JS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+    text-decoration: none;
+}
+
+body {
+    overflow: hidden;
+}
