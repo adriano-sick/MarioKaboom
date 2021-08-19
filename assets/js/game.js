@@ -1,5 +1,7 @@
 // Adriano Siqueira - 8/1/2021 - Mario Kaboom.JS
 
+//IMPORTANTE: =====>>>>COMENTAR TODAS FUNÇÕES 'PLAY()' PRA CONSEGUIR RODAR LOCAL
+
 kaboom({
     global: true,
     fullscreen: true,
@@ -15,6 +17,11 @@ const bigJumpForce = 550;
 const fallDeath = 400;
 let currentJumpForce = jumpForce;
 let isJumping = true;
+
+loadSound('pnsc', './assets/sounds/pau_no_seu_cuogg.ogg');
+loadSound('argh', './assets/sounds/tuzoarghogg.ogg');
+loadSound('adivinha', './assets/sounds/adivinhaogg.ogg');
+loadSound('spa', './assets/sounds/sperderamizade.ogg');
 
 loadRoot('https://i.imgur.com/');
 loadSprite('coin',                  'wbKxhcd.png');
@@ -37,6 +44,7 @@ loadSprite('blue-evil-shroom',  'SvV4ueD.png');
 loadSprite('blue-surprise',     'RMqCc1G.png');
 
 scene("game", ({level, score}) => {
+
     layers(['bg', 'obj', 'ui'], 'obj');
 
     const maps = [
@@ -160,6 +168,7 @@ scene("game", ({level, score}) => {
     player.collides('mushroom', (m) => {
         destroy(m);
         player.biggify(6);
+        
     });
 
     player.collides('coin', (c) => {
@@ -174,9 +183,10 @@ scene("game", ({level, score}) => {
 
     player.collides('dangerous', (d) => {
         if (isJumping) {
+            // play('argh');
             destroy(d);
         }
-        else{
+        else{            
             go('lose', {score: scoreLabel.value});           
         }
     });
@@ -190,6 +200,7 @@ scene("game", ({level, score}) => {
 
     player.collides('pipe', () => {
         keyPress('down', () => {
+            // play('adivinha');
             go('game', {
                 level: (level + 1) % maps.length,
                 score: scoreLabel.value
@@ -220,6 +231,7 @@ scene("game", ({level, score}) => {
 });
 
 scene('lose', ({score}) => {
+    // play('pnsc');   
     add([text(score, 32), origin('center'), pos(width()/2, height()/2)]);
 });
 
