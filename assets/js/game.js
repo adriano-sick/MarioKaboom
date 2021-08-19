@@ -18,10 +18,10 @@ let isJumping = true;
 
 loadRoot('https://i.imgur.com/');
 loadSprite('coin',                  'wbKxhcd.png');
-loadSprite('evil-shroom',           'LmseqUG.png');
+loadSprite('evil-shroom',           'ICmQaoA.png');
 loadSprite('brick',                 'pogC9x5.png');
 loadSprite('block',                 'M6rwarW.png');
-loadSprite('mario',                 'Wb1qfhK.png');
+loadSprite('mario',                 'bw9dLhR.png');
 loadSprite('mushroom',              '0wMd92p.png');
 loadSprite('surprise',              'gesQ1KP.png');
 loadSprite('unboxed',               'bdrLpi6.png');
