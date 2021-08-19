@@ -18,7 +18,7 @@ let isJumping = true;
 
 loadRoot('https://i.imgur.com/');
 loadSprite('coin',                  'wbKxhcd.png');
-loadSprite('evil-shroom',           'ICmQaoA.png');
+loadSprite('evil-shroom',           'Rk0fOaC.png');
 loadSprite('brick',                 'pogC9x5.png');
 loadSprite('block',                 'M6rwarW.png');
 loadSprite('mario',                 'bw9dLhR.png');
@@ -48,8 +48,8 @@ scene("game", ({level, score}) => {
             '                                      ',
             '     %   =*=%=                        ',
             '                                      ',
-            '                            -+        ',
-            '                    ^   ^   ()        ',
+            '               ^      ^     -+        ',
+            '                            ()        ',
             '==============================   =====',
           ],
           [
@@ -60,8 +60,8 @@ scene("game", ({level, score}) => {
             '£                                       £',
             '£        @@@@@@              x x        £',
             '£                          x x x        £',
-            '£                        x x x x  x   -+£',
-            '£               z   z  x x x x x  x   ()£',
+            '£              ^   ^     x x x x  x   -+£',
+            '£                      x x x x x  x   ()£',
             '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
           ]       
     ]
