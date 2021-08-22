@@ -25,7 +25,7 @@ loadSound('spa', './assets/sounds/sperderamizade.ogg');
 
 loadRoot('https://i.imgur.com/');
 loadSprite('coin',                  'wbKxhcd.png');
-loadSprite('evil-shroom',           'Rk0fOaC.png');
+loadSprite('pirocossaur',           'n1yqrNT.png');
 loadSprite('brick',                 'pogC9x5.png');
 loadSprite('block',                 'M6rwarW.png');
 loadSprite('mario',                 'bw9dLhR.png');
@@ -40,7 +40,7 @@ loadSprite('pipe-bottom-right',     'nqQ79eI.png');
 loadSprite('blue-block',        'fVscIbn.png');
 loadSprite('blue-brick',        '3e5YRQd.png');
 loadSprite('blue-steel',        'gqVoI2b.png');
-loadSprite('blue-evil-shroom',  'SvV4ueD.png');
+loadSprite('gih',               'Rk0fOaC.png');
 loadSprite('blue-surprise',     'RMqCc1G.png');
 
 scene("game", ({level, score}) => {
@@ -51,12 +51,12 @@ scene("game", ({level, score}) => {
         [
             '                                      ',
             '                                      ',
-            '                                      ',
+            '                      z               ',
             '                                      ',
             '                                      ',
             '     %   =*=%=                        ',
             '                                      ',
-            '               ^      ^     -+        ',
+            '               z      ^     -+        ',
             '                            ()        ',
             '==============================   =====',
           ],
@@ -65,10 +65,10 @@ scene("game", ({level, score}) => {
             '£                                       £',
             '£                                       £',
             '£                                       £',
-            '£                                       £',
+            '£                              ^        £',
             '£        @@@@@@              x x        £',
             '£                          x x x        £',
-            '£              ^   ^     x x x x  x   -+£',
+            '£              ^   z     x x x x  x   -+£',
             '£                      x x x x x  x   ()£',
             '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
           ]       
@@ -86,11 +86,11 @@ scene("game", ({level, score}) => {
         ')': [sprite('pipe-bottom-right'), solid(), scale(0.5)],
         '-': [sprite('pipe-top-left'), solid(), scale(0.5), 'pipe'],
         '+': [sprite('pipe-top-right'), solid(), scale(0.5), 'pipe'],
-        '^': [sprite('evil-shroom'), solid(), 'dangerous'],
+        '^': [sprite('pirocossaur'), solid(), 'dangerous', body()],
         '#': [sprite('mushroom'), solid(), 'mushroom', body()],
         '!': [sprite('blue-block'), solid(), scale(0.5)],
         '£': [sprite('blue-brick'), solid(), scale(0.5)],
-        'z': [sprite('blue-evil-shroom'), solid(), scale(0.5), 'dangerous'],
+        'z': [sprite('gih'), solid(), scale(0.5), 'dangerous', body()],
         '@': [sprite('blue-surprise'), solid(), scale(0.5), 'coin-surprise'],
         'x': [sprite('blue-steel'), solid(), scale(0.5)]
 
@@ -98,16 +98,16 @@ scene("game", ({level, score}) => {
 
     const gameLevel = addLevel(maps[level], levelCfg);
     
-    const scoreLabel = add([
-        text(score),
-        pos(30, 6),
+    let scoreLabel = add([
+        text('Score: ' + score),
+        pos(10, 6),
         layer('ui'),
         {
             value: score,
         }
     ]);
 
-    add([text('level ' + parseInt(level + 1)), pos(40, 6)]);
+    add([text('level ' + parseInt(level + 1)), pos(10, 8)]);
 
     function big() {
         let timer = 0;
@@ -174,7 +174,7 @@ scene("game", ({level, score}) => {
     player.collides('coin', (c) => {
         destroy(c);
         scoreLabel.value++;
-        scoreLabel.text = scoreLabel.value;
+        scoreLabel.text = 'Score: ' + scoreLabel.value;
     });
 
     action('dangerous', (d) => {        
@@ -183,8 +183,10 @@ scene("game", ({level, score}) => {
 
     player.collides('dangerous', (d) => {
         if (isJumping) {
-            // play('argh');
+            play('argh');
             destroy(d);
+            console.log(player.pos.x);
+            console.log(player.pos.y);
         }
         else{            
             go('lose', {score: scoreLabel.value});           
@@ -200,7 +202,7 @@ scene("game", ({level, score}) => {
 
     player.collides('pipe', () => {
         keyPress('down', () => {
-            // play('adivinha');
+            play('adivinha');
             go('game', {
                 level: (level + 1) % maps.length,
                 score: scoreLabel.value
@@ -231,8 +233,9 @@ scene("game", ({level, score}) => {
 });
 
 scene('lose', ({score}) => {
-    // play('pnsc');   
-    add([text(score, 32), origin('center'), pos(width()/2, height()/2)]);
+    play('pnsc');
+    add([text('Se fodeu!', 35), origin('center'), pos(width()/2, (height()/2) - 20)])   ;
+    add([text('Score: ' + score, 32), origin('center'), pos(width()/2, height()/2 + 50)]);
 });
 
 start("game", {level: 0, score: 0});
